@@ -7,7 +7,7 @@ THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.
  
 Authors in chronological order of contribution:
 Tim Riedel
-Author 2
+Aarush Kaboo
  
 Further Information:
 http://diystream.cns.utexas.edu/
@@ -17,10 +17,10 @@ Timothy Riedel
 triedel@utexas.edu
  
 Brief Description of Goal of Code:
-blah, blah, blah,
+Goal of code is to make an app that will differentiate between lab equipment; specifically a volumetric flask vs. a graduated cylinder.
  
 Known Issues:
-blah, blah, blah, blah
+None at the moment.
 Ignore this error message if you see it using the javaScript console: Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'interest-cohort'.
 
 References:
@@ -38,7 +38,35 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 
 <script>
 
-	//YOUR JAVASCRIPT GOES HERE
+
+    var VF_count = 0; //VF will represent the variable regarding the volumetric flask and how many times the question answered will be of that
+    var GC_count = 0; //GC will represent the variable regardint the graduated cylinder and how many times a question answered that identifies a feature of a graduated cylinder
+	<!--the VF_count variable will be used to track for the response and will be added to with every response that aligns with the allergy symptoms; it will initially be set at 0-->
+	<!--the GC_count variable will be used to track for the response and will be added to with every response that aligns with the cold symptoms; it will initially be set at 0-->
+
+		
+<!--the VFAdd function is used to add to the variable allergy_count everytime an allergy symptom is the response from the questions prompted-->
+
+    function VFAdd() {
+        VF_count = VF_count + 1;
+        alert(VF_count);
+    }
+
+<!--the GCAdd function is sued to add to the cold allergy_count everytime a cold symptom is the response from the questions prompted-->
+    function GCAdd() {
+        GC_count = GC_count + 1;
+        alert(GC_count);
+	    <!--this line is used to allow for the screen to display for the amount of cold symptoms that are reported by the user-->
+    }
+
+    function Results() {
+        var VFP = Math.round((VF_count / 4) * 100); <!--expresses the volumetric flask percent-->
+        var GCP = Math.round((GC_count / 4) * 100); <!--expresses the graduated cylinder percent-->
+        var resultText = document.getElementById("results");
+        resultText.innerHTML = "Probability it is volumetric flask is =" + VFP + "%" + "<br> Probability it is a graduated cylinder =" + GCP + "%";  <!--line that expresses both percents-->
+    }
+
+
 
 </script>	
 
@@ -68,8 +96,82 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 
 <body>
 	
-	<!-- HERE IS WHERE ALL OF YOUR HTML PAGES GO -->
-	REPLACE THIS TEXT
+	
+<body>
+<div id="header" class="w3-container w3-flat-carrot">
+	<h1>Volumetric Flask or Graduated Cylinder?</h1>
+</div>
+	
+<div id="content" class="w3-container">
+	<p>Are you in a lab where you don't know which piece of equipment to use? Specifically, do you not know the difference between a volumetric flask and a graduated cylinder? Well, take this test to find out which one to use!</p>
+		<!--this is a sentence that is used to help the person who is taking the test understand what it is designed for-->
+	<a href="#one" class="w3-btn w3-grey w3-round"> Get Started </a>
+	
+	<p>The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at 		Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code 			does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.</p>
+ 	
+	<p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>
+
+<div class="page" id="one"> <!--this part of the code is used to indicate a new page, and what that page identifier is, it should be the opening line to every piece of code regarding one page-->
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 1</h1> <!--this identifies that it is going to display question1 at the top of the first question page-->
+	</div>
+	
+    	<div id="content" class="w3-container">
+        <p>Is your instrument long and narrow or does it have a round bottom?.</p>  <!--the question-->
+		<a href="#two"  onclick="VFAdd();" class="w3-btn w3-black"> Long and narrow</a> <!--calls back function VFAdd to indicate that it is a volumetric flask when the button long and narrow is pressed, while also moving the page to the next question-->
+         	<a href="#two"  onclick="GCAdd();" class="w3-btn w3-black"> Round bottom</a> <!--calls back function GCAdd to indicate that it is a graduated cylinder when the button round bottomx is pressed, while also moving the page to the next question-->
+    	</div>
+</div>
+
+<div class="page" id="two"> <!--indicates what the page two components will look like-->
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question2?</h1> <!--the identifier at the top of the page that will indicate which question this will be-->
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Is there one marking for a precise measurement or multiple lines on the side?</p> <!--This is question 2-->
+		<a href="#three"  onclick="VFAdd();" class="w3-btn w3-black"> One</a> <!--this is if the answer is one, the count for VFAdd function will go up as the user intidcates a volumetric flask and the page goes to the third question-->
+         	<a href="#three"  onclick="GCAdd();" class="w3-btn w3-black">Multiple</a>  <!--this is if the answer is multiple, the count for GCAdd function will go up as the user intidcates a graduated cylinder and the page goes to the third question-->
+	</div>
+</div>	
+
+<div class="page" id="three"> <!--indicates the creation of the third page-->
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question3</h1> <!--identifier at the top of the page that indicates it is question 3-->
+	</div>
+	
+    	<div id="content" class="w3-container">
+        <p>Are you measuring a single precise volume or general measurements of volume?.</p>   <!--This is question 3-->
+	<a href="#four"  onclick="VFAdd();" class="w3-btn w3-black"> Single Precise</a>  <!--this is if the answer is single precise, the count for VFAdd function will go up as the user intidcates a volumetric flask and the page goes to the fourth question-->
+         <a href="#four"  onclick="GCAdd();" class="w3-btn w3-black">General Measurements</a>  <!--this is if the answer is general measurement, the count for GCAdd function will go up as the user intidcates a graduated cylinder and the page goes to the fourth question-->
+    	</div>
+</div>
+
+<div class="page" id="four"> <!--indicates that it is the creation of the fourth page-->
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question4</h1> <!--question 4 identiifer at the top of the screen-->
+	</div>
+	
+    	<div id="content" class="w3-container">
+        <p>Is your instrument prioritizing accuracy or precision or not ?</p>  <!--question 4-->
+	<a href="#five"  onclick="VFAdd();" class="w3-btn w3-black"> Yes</a>  <!--this is if the answer is yes, the count for VFAdd function will go up as the user intidcates a volumetric flask and the page goes to the results page page-->
+        <a href="#five"  onclick="GCAdd();" class="w3-btn w3-black">No</a>  <!--this is if the answer is no, the count for GCAdd function will go up as the user intidcates a graduated cylinder and the page goes to the results page-->
+    	</div>
+</div>
+
+
+<div class="page" id="five"> <!--indicates that it is the creation of the seventh page-->
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Results</h1>  <!--results identiifer at the top of the screen-->
+	</div>
+	
+    	<div id="content" class="w3-container">
+		<p id = "results" ></p>
+		<a href="#seven" onclick="Results()" class="w3-btn w3-black">View Results</a> <!--this line is to indicate that clicking the button will call back the Results function and display the results-->
+    	</div>
+</div>
+
+	
 	
 </body>
 </html>
