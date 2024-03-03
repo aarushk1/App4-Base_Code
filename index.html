@@ -63,7 +63,7 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
         var VFP = Math.round((VF_count / 4) * 100); <!--expresses the volumetric flask percent-->
         var GCP = Math.round((GC_count / 4) * 100); <!--expresses the graduated cylinder percent-->
         var resultText = document.getElementById("results");
-        resultText.innerHTML = "Probability it is volumetric flask is =" + VFP + "%" + "<br> Probability it is a graduated cylinder =" + GCP + "%";  <!--line that expresses both percents-->
+        document.getElementById("results").innerHTML = "Probability it is volumetric flask is =" + VFP + "%" + "<br> Probability it is a graduated cylinder =" + GCP + "%";  <!--line that expresses both percents-->
     }
 
 
